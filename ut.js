@@ -52,7 +52,7 @@ var printUsage = function() {
 	w('UtilityTool (UT) - Utility for the BTC <=> RSK 2WP\n');
 	w('==============================================\n\n');
 	w('Usage:\n');
-	w('./tt.js [options] [command]\n\n');
+	w('./ut.js [options] [command]\n\n');
 	w('Available commands:\n');
 	w('-a [raw-btc-transactin]\t\t\t\t Get RSK derived address from btc raw transaction to the bridge\n');
 	w('\n');

@@ -6,7 +6,7 @@ UtilityTool (UT) - Utility for the BTC <=> RSK 2WP
 ==============================================
 
 Usage:
-./tt.js [options] [command]
+./ut.js [options] [command]
 
 Available commands:
 -a [raw-btc-transactin]				 Get RSK derived address from btc raw transaction to the bridge
