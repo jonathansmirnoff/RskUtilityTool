@@ -2,9 +2,6 @@
 UtilityTool (UT) - Utility for the BTC &lt;=> RSK 2WP
 
 ```
-UtilityTool (UT) - Utility for the BTC <=> RSK 2WP
-==============================================
-
 Usage:
 ./tt.js [options] [command]
 
