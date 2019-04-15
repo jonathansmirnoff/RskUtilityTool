@@ -1,0 +1,21 @@
+{
+  "name": "eckey-tests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "binstring": "^0.2.1",
+    "eckey": "^1.0.0",
+    "ethereumjs-util": "^6.1.0",
+    "bitcoinjs-lib": "^4.0.3",
+    "secp256k1": "^3.6.2",
+    "argh": "^0.1.4",
+    "mathjs": "^5.9.0",
+    "colors": "^1.3.3"
+  }
+}
