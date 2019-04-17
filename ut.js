@@ -9,27 +9,23 @@ var colors = require('colors');
 var getRskAddress = function(argh) {
 	var rawTx = argh.argv && argh.argv[0];
 	if (rawTx == null) {
-		console.error('Must specify a btc transaction');
+		console.error('must specify a btc transaction');
 		return;
 	}
 
 	var tx = bitcoin.Transaction.fromHex(rawTx);
 
-	if (tx.ins.length == 0){
-		console.error('the tx must have unless one input.');
+	if (tx.ins.length == 0 && tx.ins[0].script != nul){
+		console.error('the tx must have at least one input.');
 		return;
 	}
 
 	var scriptChunks = bitcoin.script.toASM(tx.ins[0].script);
 
-	if ((tx.ins[0].script == null) || 
-		(tx.ins[0].script == null) ||
-		(scriptChunks == null || (scriptChunks != null && scriptChunks.split(' ').length < 2 ))) {
+	if ((scriptChunks != null && scriptChunks.split(' ').length < 2 )) {
 		console.error('from address have to be P2PKH');
 		return;
-	}
-
-	console.log("");
+	}	
     		
     var pubKey = scriptChunks.split(' ')[1];
     var uncompressed_public_key_hex = secp256k1.publicKeyConvert(new Buffer.from(pubKey, 'hex'), false).toString('hex');
