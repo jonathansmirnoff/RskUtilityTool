@@ -1,46 +1,57 @@
 'use strict'
-var eu = require('ethereumjs-util');
-var bitcoin = require('bitcoinjs-lib');
-var secp256k1 = require('secp256k1');
-var math = require('mathjs');
 var argh = require('argh').argv;
 var colors = require('colors');
+var rskUtil = require('./lib/rskUtil');
 
-var getRskAddress = function(argh) {
-	var rawTx = argh.argv && argh.argv[0];
-	if (rawTx == null) {
-		console.error('must specify a btc transaction');
-		return;
+var getRskAddressOperation = function(argh){	
+	let rawTx = argh.argv && argh.argv[0];
+	let result = rskUtil.getRskAddress(rawTx);	
+
+	switch (result) {
+		case -1:
+			console.error('it must be specified a btc transaction'.red);	
+			break;
+		case -2:
+			console.error('wrong formated tx'.red);	
+			break;
+		case -3:
+			console.error('the tx must have at least one input.'.red);
+			break;
+		case -4:
+			console.error('from address have to be P2PKH'.red);
+			break;
+		default:
+			console.log("RSK derived address: \n".yellow + result);
+			break;
 	}
 
-	var tx = bitcoin.Transaction.fromHex(rawTx);
+	return result;
+}
 
-	if (tx.ins.length == 0 && tx.ins[0].script != nul){
-		console.error('the tx must have at least one input.');
-		return;
+var getAmountOperation = function(argh){	
+	let rawTx = argh.argv && argh.argv[0];
+	let result = rskUtil.getRskAddress(rawTx);	
+
+	switch (result) {
+		case -1:
+			console.error('it must be specified a btc transaction'.red);	
+			break;
+		case -2:
+			console.error('wrong formated tx'.red);	
+			break;
+		case -3:
+			console.error('the tx must have at least one input.'.red);
+			break;
+		case -4:
+			console.error('from address have to be P2PKH'.red);
+			break;
+		default:
+			console.log("Amount: ".yellow  + result + ' RBTC'.yellow);
+			break;
 	}
 
-	var scriptChunks = bitcoin.script.toASM(tx.ins[0].script);
-
-	if ((scriptChunks != null && scriptChunks.split(' ').length < 2 )) {
-		console.error('from address have to be P2PKH');
-		return;
-	}	
-    		
-    var pubKey = scriptChunks.split(' ')[1];
-    var uncompressed_public_key_hex = secp256k1.publicKeyConvert(new Buffer.from(pubKey, 'hex'), false).toString('hex');
-
-    //console.log("Public key: \n" + pubKey);
-    //console.log("Uncompressed public key: \n" + secp256k1.publicKeyConvert(new Buffer(pubKey, 'hex'), false).toString('hex'));
-
-    var upk_buf = new Buffer.from(uncompressed_public_key_hex, 'hex');
-    var addr_buf = eu.pubToAddress(upk_buf.slice(1,65));
-
-	var addr = addr_buf.toString('hex');
-
-	console.log("RSK derived address: \n".yellow + addr);
-	console.log("Amount: ".yellow  + (tx.outs[0].value / math.pow(10,8)) + ' RBTC'.yellow);
-};
+	return result;
+}
 
 var printUsage = function() {
 	var w = process.stdout.write.bind(process.stdout);
@@ -51,6 +62,7 @@ var printUsage = function() {
 	w('./ut.js [options] [command]\n\n');
 	w('Available commands:\n');
 	w('-a [raw-btc-transactin]\t\t\t\t Get RSK derived address from btc raw transaction to the bridge\n');
+	w('-v [raw-btc-transactin]\t\t\t\t Get amount from btc raw transaction to the bridge\n');
 	w('\n');
 };
 
@@ -59,7 +71,8 @@ var unknownOperation = function() {
 }
 
 var OPERATIONS = {
-    'a': getRskAddress,	
+	'a': getRskAddressOperation,	
+	'v': getAmountOperation,	
 	'help': printUsage
 };
 
