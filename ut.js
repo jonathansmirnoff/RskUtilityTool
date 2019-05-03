@@ -5,7 +5,7 @@ var rskUtil = require('./lib/rskUtil');
 
 var getRskAddressOperation = function(argh){	
 	let rawTx = argh.argv && argh.argv[0];
-	let result = rskUtil.getRskAddress(rawTx);	
+	let result = rskUtil.getRskAddress(rawTx);
 
 	switch (result) {
 		case -1:
@@ -26,6 +26,11 @@ var getRskAddressOperation = function(argh){
 	}
 
 	return result;
+}
+
+var getFederationAddressOperation = function(argh){
+	var result = rskUtil.getFederationAddress();
+	console.log("Federation address: ".yellow + result);
 }
 
 var getAmountOperation = function(argh){	
@@ -63,6 +68,7 @@ var printUsage = function() {
 	w('Available commands:\n');
 	w('-a [raw-btc-transactin]\t\t\t\t Get RSK derived address from btc raw transaction to the bridge\n');
 	w('-v [raw-btc-transactin]\t\t\t\t Get amount from btc raw transaction to the bridge\n');
+	w('-f  \t\t\t\t\t\t Get federation address\n');
 	w('\n');
 };
 
@@ -72,7 +78,8 @@ var unknownOperation = function() {
 
 var OPERATIONS = {
 	'a': getRskAddressOperation,	
-	'v': getAmountOperation,	
+	'v': getAmountOperation,
+	'f' : getFederationAddressOperation,
 	'help': printUsage
 };
 
