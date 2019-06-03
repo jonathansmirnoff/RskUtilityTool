@@ -28,8 +28,8 @@ var getRskAddressOperation = function(argh){
 	return result;
 }
 
-var getFederationAddressOperation = function(argh){
-	var result = rskUtil.getFederationAddress();
+var getFederationAddressOperation = async function(argh){
+	var result = await rskUtil.getFederationAddress();
 	console.log("Federation address: ".yellow + result);
 }
 
