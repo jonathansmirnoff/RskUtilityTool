@@ -9,16 +9,16 @@
   "author": "Jonathan Smirnoff",
   "license": "MIT",
   "dependencies": {
-    "binstring": "0.2.1",
+    "binstring": "^0.2.1",
     "eckey": "1.0.0",
-    "ethereumjs-util": "6.1.0",
-    "bitcoinjs-lib": "4.0.3",
+    "ethereumjs-util": "7.0.0",
+    "bitcoinjs-lib": "5.1.7",
     "secp256k1": "3.6.2",
-    "argh": "^0.1.4",
-    "mathjs": "^5.9.0",
+    "argh": "^1.0.0",
+    "mathjs": "^7.0.0",
     "colors": "^1.3.3",
-    "mocha": "^6.1.3",
-    "web3": "1.0.0-beta.55",
+    "mocha": "^7.1.2",
+    "web3": "1.2.7",
     "@rsksmart/rsk-precompiled-abis": "^2.0.1-WASABI"
   }
 }

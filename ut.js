@@ -35,7 +35,7 @@ var getFederationAddressOperation = async function(argh){
 
 var getAmountOperation = function(argh){	
 	let rawTx = argh.argv && argh.argv[0];
-	let result = rskUtil.getRskAddress(rawTx);	
+	let result = rskUtil.getAmount(rawTx);	
 
 	switch (result) {
 		case -1:
