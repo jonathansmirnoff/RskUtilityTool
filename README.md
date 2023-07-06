@@ -8,3 +8,4 @@ Usage:
 Available commands:
 -a [raw-btc-transactin]				 Get RSK derived address from btc raw transaction to the bridge
 ```
+ 
